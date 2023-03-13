@@ -37,9 +37,9 @@ int main()
     fwrite(a1,sizeof(a1)-1,1,fp);
     fwrite(ctime(&now),25,1,fp);
     
-    printf(" Welcome! How many set of lotto to buy?\n");
+    printf(" 歡迎光臨長庚樂透彩購買機台\n請問您要買幾組樂透彩：");
     scanf("%d",&n);
-    printf("Create the number into lotto.txt.");
+    printf("以您購買的%d組樂透組合輸出至 lotto.txt.", n
     
     while(i<n){
         int a[7] = {-1,-1,-1,-1,-1,-1} ;
