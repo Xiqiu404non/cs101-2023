@@ -2,83 +2,77 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main(){
-	int seed = 10;
-	srand(time(NULL));
-	int num = 5, tm;
-	int same = 0;
-	struct tm* info;
-	
-	printf("歡迎光臨長庚樂透彩購買機台\n請問您要購買幾組 : ");
-	scanf("%d", &num);
-	printf("已為您購買 %d 組樂透組合輸出至 lotto.txt", num); 
-	
-	int lotto[5][7], tmp[6];
-	FILE* fp;
-	
-	fp = fopen("lotto.txt", "w+");
-	
-	
-	fprintf(fp, "===========lotto649=========\n= ");
-	time_t curtime;
-	time(&curtime);
-	info = localtime(&curtime);
-	fprintf(fp, "%s", asctime(info));
-	
-	for(int i = 0;i<num;i++){
-		same = 1;
-		while(same){
-			same = 0;
-			for(int j = 0;j<6;j++)
-				tmp[j] = rand()% (69 - 1 +1) + 1;
-			tmp[6] = rand()% (9 - 1 +1) + 1;
-			for(int j = 0;j<=6-1;j++){
-				for(int k = j+1;k<=6;k++){
-					if(tmp[j] == tmp[k]){
-						same = 1;
-						break;
-					}
-				}
-			}
-			
-		}
-		
-		
-		for(int j = 0;j<=4;j++){
-		    for(int k = j+1;k<=5;k++){
-		        if(tmp[j]>tmp[k]){
-		            tm = tmp[k];
-		            tmp[k] = tmp[j];
-		            tmp[j] = tm;
-		        }
-		    }
-		}
-		
-		for(int j = 0;j<=6;j++){
-			lotto[i][j] = tmp[j];
-		}
-		
-	}
-	
-	for(int i = 0;i<num;i++){
-		fprintf(fp, "=[%d]: ", i+1);
-		for(int j = 0;j<=6;j++){
-			if(lotto[i][j]<=9)
-				fprintf(fp, "0");
-			fprintf(fp, "%d ", lotto[i][j]);
-		}
-		fprintf(fp, "=\n");
-	}
-	for(int i = num;i<5;i++){
-		fprintf(fp, "=[%d]: ", i+1);
-		for(int j = 0;j<=6;j++){
-			fprintf(fp, "-- ");
-		}
-		fprintf(fp, "=\n");
-	}
-	fprintf(fp, "===========CGU@CSIE=========");
-	
-	fclose(fp);
+int chick_list(int num, int list[6]){
+    for (int i =0;i<5;i++){
+        if (num == list[i])
+            return 0;
+    }
 
-	return 0;
+    return 1 ;
+}
+
+void swap_list(int list[6]){
+    for (int i = 0; i < 6; ++i) {
+    for (int j = 0; j < i; ++j) {
+      if (list[j] > list[i]) {
+        int temp = list[j];
+        list[j] = list[i];
+        list[i] = temp;
+        }
+    }}
+}
+
+int main()
+{
+    time_t now;
+    time(&now);
+    FILE* fp;
+    int n ,j=0 ,i=0 , type, num;
+    int a[7] = {-1,-1,-1,-1,-1,-1} ;
+    char o;
+    char a1[] = "=======Lucky lotto=======\n";
+    
+    srand((unsigned) time(NULL));
+    fp = fopen("lotto.txt","wb+");
+    fwrite(a1,sizeof(a1)-1,1,fp);
+    fwrite(ctime(&now),25,1,fp);
+    
+    printf("歡迎光臨長庚樂透彩購買機台\n請問您要購買幾組 : ");
+				scanf("%d", &num);
+				printf("已為您購買 %d 組樂透組合輸出至 lotto.txt", num); 
+    
+    while(i<n){
+        int a[7] = {-1,-1,-1,-1,-1,-1} ;
+        j=0;
+    while(j<6){
+        num = rand()%69+1;
+        type = chick_list(num,a);
+    
+        if (type){
+           a[j] = num;
+           j++;
+        }
+         
+    }
+    swap_list(a);
+    while (1){
+    num = rand()%10+1;
+    type = chick_list(num,a);
+    if (type){
+        a[j] = num;
+        break;
+    } 
+    }
+    fprintf(fp,"[%d]:",i+1);
+    for (int i = 0; i < 7; i++) {
+        fprintf(fp, "%d ", a[i]);
+    }
+    fwrite("\n",1,1,fp);
+
+    i++;
+    }
+    fwrite("=========================",25,1,fp);
+    fseek(fp,0,SEEK_SET);
+    fclose(fp);
+    return 0;
 }
