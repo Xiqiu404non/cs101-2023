@@ -39,7 +39,7 @@ int main()
     
     printf(" 歡迎光臨長庚樂透彩購買機台\n請問您要買幾組樂透彩：");
     scanf("%d",&n);
-    printf("以您購買的%d組樂透組合輸出至 lotto.txt.", n
+    printf("以您購買的%d組樂透組合輸出至 lotto.txt.", n);
     
     while(i<n){
         int a[7] = {-1,-1,-1,-1,-1,-1} ;
