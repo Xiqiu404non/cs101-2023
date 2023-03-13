@@ -38,8 +38,8 @@ int main()
     fwrite(ctime(&now),25,1,fp);
     
     printf("歡迎光臨長庚樂透彩購買機台\n請問您要購買幾組 : ");
-				scanf("%d", &num);
-				printf("已為您購買 %d 組樂透組合輸出至 lotto.txt", num); 
+	scanf("%d", &num);
+	printf("已為您購買 %d 組樂透組合輸出至 lotto.txt", num); 
     
     while(i<n){
         int a[7] = {-1,-1,-1,-1,-1,-1} ;
