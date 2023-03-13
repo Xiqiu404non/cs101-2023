@@ -71,7 +71,7 @@ int main()
 
     i++;
     }
-    fwrite("=========================",25,1,fp);
+    fwrite("======== csie@CGU ========",25,1,fp);
     fseek(fp,0,SEEK_SET);
     fclose(fp);
     return 0;
