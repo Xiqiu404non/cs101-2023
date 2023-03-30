@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include<ctype.h>
+#include <ctype.h>
 typedef struct lotto_record {
     int receipt_id;
     int receipt_price;
