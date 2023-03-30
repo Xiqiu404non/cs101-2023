@@ -186,7 +186,7 @@ void redemption(){
         }
     }
     if(any == 0)
-        printf("\n很遺憾您並未中獎 T_T");
+        printf("\n很遺憾您並未中獎QQ");
     fclose(ptr);
 
 }
